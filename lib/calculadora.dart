@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 
 class Calculadora extends StatefulWidget {
@@ -105,7 +107,7 @@ class _CalculadoraState extends State<Calculadora>{
     return Scaffold(
       appBar: AppBar(
         title: const Text('Simulador de Dosagem de Cloro'),
-        backgroundColor: Colors.blue,
+        backgroundColor: Color.fromRGBO(43, 57, 144, 1.0),
       ),
       body: Container(
         child: SingleChildScrollView(
@@ -120,7 +122,7 @@ class _CalculadoraState extends State<Calculadora>{
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
-                    color: Colors.blue,
+                    color: Color.fromRGBO(43, 57, 144, 1.0),
                   ),
                 ),
               ),
@@ -176,7 +178,20 @@ class _CalculadoraState extends State<Calculadora>{
               ),              
               Padding(
                 padding: EdgeInsets.only(top: 16),
-                child: ElevatedButton(                  
+                child: ElevatedButton(   
+                  style: ElevatedButton.styleFrom(
+                    primary: Color.fromRGBO(43, 57, 144, 1.0),
+                    onPrimary: Colors.white,
+                    minimumSize: Size(88, 40),
+                    maximumSize: Size(176,100),                    
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(8)),
+                    ),
+                    textStyle: const TextStyle(
+                      fontSize: 8,
+                      fontWeight: FontWeight.bold,
+                    )
+                  ),              
                   child: const Text(
                     'Calcular',
                     style: TextStyle(fontSize: 18),
@@ -191,7 +206,7 @@ class _CalculadoraState extends State<Calculadora>{
                   style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
-                    color: Colors.blue
+                    color: Color.fromRGBO(43, 57, 144, 1.0)
                   ),
                 ),
               ),
@@ -202,7 +217,7 @@ class _CalculadoraState extends State<Calculadora>{
                   style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
-                    color: Colors.blue
+                    color: Color.fromRGBO(43, 57, 144, 1.0)
                   ),
                 ),
               ),
@@ -213,7 +228,7 @@ class _CalculadoraState extends State<Calculadora>{
                   style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
-                      color: Colors.blue
+                      color: Color.fromRGBO(43, 57, 144, 1.0)
                     ),
                 ),
               ),
@@ -224,7 +239,7 @@ class _CalculadoraState extends State<Calculadora>{
                   style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
-                      color: Colors.blue
+                      color: Color.fromRGBO(43, 57, 144, 1.0)
                     ),
                 ),
               ),
@@ -235,7 +250,7 @@ class _CalculadoraState extends State<Calculadora>{
                   style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
-                      color: Colors.blue
+                      color: Color.fromRGBO(43, 57, 144, 1.0)
                     ),
                 ),
               ),
@@ -246,7 +261,7 @@ class _CalculadoraState extends State<Calculadora>{
                   style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
-                      color: Colors.blue
+                      color: Color.fromRGBO(43, 57, 144, 1.0)
                     ),
                 ),
               ),
