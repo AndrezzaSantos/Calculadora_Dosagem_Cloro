@@ -23,7 +23,7 @@ class _HomeState extends State<Home>{
       */
       body: Container(
         child: SingleChildScrollView(
-          padding: EdgeInsets.all(64),
+          padding: EdgeInsets.all(32),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
@@ -34,7 +34,7 @@ class _HomeState extends State<Home>{
                   child: Text(
                     'APP LUCIANO NERES',
                     style: TextStyle(
-                      fontSize: 40,
+                      fontSize: 34,
                       fontWeight: FontWeight.bold,
                       color: Color.fromRGBO(43, 57, 144, 1.0),  
                     ),
@@ -43,16 +43,16 @@ class _HomeState extends State<Home>{
                 ),
               ),
               Padding(
-                padding: EdgeInsets.only(top: 50),
+                padding: EdgeInsets.only(top: 30),
                 child: Image.asset('imagens/logo.png'),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 50),
+                padding: const EdgeInsets.only(top: 30),
                 child: ElevatedButton(                
                   style: ElevatedButton.styleFrom(
                     primary: Color.fromRGBO(43, 57, 144, 1.0),
                     onPrimary: Colors.white,
-                    minimumSize: Size(88, 50),
+                    minimumSize: Size(88, 40),
                     shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(20)),
                     ),
@@ -66,16 +66,16 @@ class _HomeState extends State<Home>{
                       return Calculadora();
                     }));
                   }, 
-                  child: Text('SIMULADOR DE DOSAGEM DE CLORO'),
+                  child: Text('DOSAGEM DE CLORO'),
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 16),
+                padding: const EdgeInsets.only(top: 8),
                 child: ElevatedButton(                
                   style: ElevatedButton.styleFrom(
                     primary: Color.fromRGBO(43, 57, 144, 1.0),
                     onPrimary: Colors.white,
-                    minimumSize: Size(88, 50),
+                    minimumSize: Size(88, 40),
                     shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(20)),
                     ),
@@ -85,16 +85,16 @@ class _HomeState extends State<Home>{
                     )
                   ),
                   onPressed: (){}, 
-                  child: Text('SIMULADOR CALCULO TESTE 2'),
+                  child: Text('CALCULO TESTE 2'),
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 16),
+                padding: const EdgeInsets.only(top: 8),
                 child: ElevatedButton(                
                   style: ElevatedButton.styleFrom(
                     primary: Color.fromRGBO(43, 57, 144, 1.0),
                     onPrimary: Colors.white,
-                    minimumSize: Size(88, 50),
+                    minimumSize: Size(88, 40),
                     shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(20)),
                     ),
@@ -106,7 +106,7 @@ class _HomeState extends State<Home>{
                   onPressed: (){
                     
                   }, 
-                  child: Text('SIMULADOR CALCULO TESTE 3'),
+                  child: Text('CALCULO TESTE 3'),
                 ),
               ),
             ],

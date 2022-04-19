@@ -1,30 +1,30 @@
 [
     {
-        "merged": "C:\\AmbienteTrabalho\\Alura\\Flutter\\Calculadora_Dosagem_Cloro\\build\\app\\intermediates\\res\\merged\\debug\\mipmap-hdpi_ic_launcher.png.flat",
-        "source": "C:\\AmbienteTrabalho\\Alura\\Flutter\\Calculadora_Dosagem_Cloro\\android\\app\\src\\main\\res\\mipmap-hdpi\\ic_launcher.png"
+        "merged": "C:\\AmbienteTrabalho\\github\\public\\flutter\\dosagemdecloro\\build\\app\\intermediates\\res\\merged\\debug\\mipmap-xxxhdpi_ic_launcher.png.flat",
+        "source": "C:\\AmbienteTrabalho\\github\\public\\flutter\\dosagemdecloro\\android\\app\\src\\main\\res\\mipmap-xxxhdpi\\ic_launcher.png"
     },
     {
-        "merged": "C:\\AmbienteTrabalho\\Alura\\Flutter\\Calculadora_Dosagem_Cloro\\build\\app\\intermediates\\res\\merged\\debug\\drawable_launch_background.xml.flat",
-        "source": "C:\\AmbienteTrabalho\\Alura\\Flutter\\Calculadora_Dosagem_Cloro\\android\\app\\src\\main\\res\\drawable\\launch_background.xml"
+        "merged": "C:\\AmbienteTrabalho\\github\\public\\flutter\\dosagemdecloro\\build\\app\\intermediates\\res\\merged\\debug\\mipmap-hdpi_ic_launcher.png.flat",
+        "source": "C:\\AmbienteTrabalho\\github\\public\\flutter\\dosagemdecloro\\android\\app\\src\\main\\res\\mipmap-hdpi\\ic_launcher.png"
     },
     {
-        "merged": "C:\\AmbienteTrabalho\\Alura\\Flutter\\Calculadora_Dosagem_Cloro\\build\\app\\intermediates\\res\\merged\\debug\\mipmap-mdpi_ic_launcher.png.flat",
-        "source": "C:\\AmbienteTrabalho\\Alura\\Flutter\\Calculadora_Dosagem_Cloro\\android\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher.png"
+        "merged": "C:\\AmbienteTrabalho\\github\\public\\flutter\\dosagemdecloro\\build\\app\\intermediates\\res\\merged\\debug\\drawable_launch_background.xml.flat",
+        "source": "C:\\AmbienteTrabalho\\github\\public\\flutter\\dosagemdecloro\\android\\app\\src\\main\\res\\drawable\\launch_background.xml"
     },
     {
-        "merged": "C:\\AmbienteTrabalho\\Alura\\Flutter\\Calculadora_Dosagem_Cloro\\build\\app\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi_ic_launcher.png.flat",
-        "source": "C:\\AmbienteTrabalho\\Alura\\Flutter\\Calculadora_Dosagem_Cloro\\android\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher.png"
+        "merged": "C:\\AmbienteTrabalho\\github\\public\\flutter\\dosagemdecloro\\build\\app\\intermediates\\res\\merged\\debug\\mipmap-mdpi_ic_launcher.png.flat",
+        "source": "C:\\AmbienteTrabalho\\github\\public\\flutter\\dosagemdecloro\\android\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher.png"
     },
     {
-        "merged": "C:\\AmbienteTrabalho\\Alura\\Flutter\\Calculadora_Dosagem_Cloro\\build\\app\\intermediates\\res\\merged\\debug\\mipmap-xhdpi_ic_launcher.png.flat",
-        "source": "C:\\AmbienteTrabalho\\Alura\\Flutter\\Calculadora_Dosagem_Cloro\\android\\app\\src\\main\\res\\mipmap-xhdpi\\ic_launcher.png"
+        "merged": "C:\\AmbienteTrabalho\\github\\public\\flutter\\dosagemdecloro\\build\\app\\intermediates\\res\\merged\\debug\\drawable-v21_launch_background.xml.flat",
+        "source": "C:\\AmbienteTrabalho\\github\\public\\flutter\\dosagemdecloro\\android\\app\\src\\main\\res\\drawable-v21\\launch_background.xml"
     },
     {
-        "merged": "C:\\AmbienteTrabalho\\Alura\\Flutter\\Calculadora_Dosagem_Cloro\\build\\app\\intermediates\\res\\merged\\debug\\drawable-v21_launch_background.xml.flat",
-        "source": "C:\\AmbienteTrabalho\\Alura\\Flutter\\Calculadora_Dosagem_Cloro\\android\\app\\src\\main\\res\\drawable-v21\\launch_background.xml"
+        "merged": "C:\\AmbienteTrabalho\\github\\public\\flutter\\dosagemdecloro\\build\\app\\intermediates\\res\\merged\\debug\\mipmap-xhdpi_ic_launcher.png.flat",
+        "source": "C:\\AmbienteTrabalho\\github\\public\\flutter\\dosagemdecloro\\android\\app\\src\\main\\res\\mipmap-xhdpi\\ic_launcher.png"
     },
     {
-        "merged": "C:\\AmbienteTrabalho\\Alura\\Flutter\\Calculadora_Dosagem_Cloro\\build\\app\\intermediates\\res\\merged\\debug\\mipmap-xxxhdpi_ic_launcher.png.flat",
-        "source": "C:\\AmbienteTrabalho\\Alura\\Flutter\\Calculadora_Dosagem_Cloro\\android\\app\\src\\main\\res\\mipmap-xxxhdpi\\ic_launcher.png"
+        "merged": "C:\\AmbienteTrabalho\\github\\public\\flutter\\dosagemdecloro\\build\\app\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi_ic_launcher.png.flat",
+        "source": "C:\\AmbienteTrabalho\\github\\public\\flutter\\dosagemdecloro\\android\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher.png"
     }
 ]

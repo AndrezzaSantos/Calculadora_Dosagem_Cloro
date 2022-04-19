@@ -6,6 +6,7 @@ void main() {
   runApp(MaterialApp(
     //home: Calculadora(),
     home: Home(),
+    debugShowCheckedModeBanner: false,
   ));
 }
 

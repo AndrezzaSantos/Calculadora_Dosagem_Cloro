@@ -55,9 +55,9 @@ class _CalculadoraState extends State<Calculadora>{
       
     }
 
-    if(consumoCloro == 0 || concentracaoSolucao == null){
+    if(consumoCloro == 0 || concentracaoSolucao == 0){
       setState(() {
-        textoConcentraSolucao = 'Dosagem solução (L/h): inserir dados corretamente!';
+        textoDosagemSolucao = 'Dosagem solução (L/h): inserir dados corretamente!';
       });
     }else{
       dosagemSolucao = consumoCloro / concentracaoSolucao;
@@ -88,7 +88,7 @@ class _CalculadoraState extends State<Calculadora>{
       });
     }
 
-    textoSugestao = 'Sugerir dosadora com vazão máxima superior à (L/H): ' + dosagemSolucao.toStringAsFixed(2);
+    textoSugestao = 'Sugerir dosadora com vazão máxima à (L/H): ' + dosagemSolucao.toStringAsFixed(2);
 
   }
 
@@ -110,13 +110,14 @@ class _CalculadoraState extends State<Calculadora>{
         backgroundColor: Color.fromRGBO(43, 57, 144, 1.0),
       ),
       body: Container(
+        //alignment: Alignment.center,
         child: SingleChildScrollView(
-          padding: EdgeInsets.all(22),
+          padding: EdgeInsets.all(12),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               const Padding(
-                padding: EdgeInsets.only(bottom: 8),
+                padding: EdgeInsets.only(bottom: 5),
                 child: Text(
                   'Insira todos os valores corretamente',
                   style: TextStyle(
@@ -132,7 +133,7 @@ class _CalculadoraState extends State<Calculadora>{
                   labelText: 'Volume água consumida (L/h)'
                 ),
                 style: const TextStyle(
-                  fontSize: 16,
+                  fontSize: 14,
                 ),
                 controller: volumeAguaConsumida,
               ),
@@ -142,7 +143,7 @@ class _CalculadoraState extends State<Calculadora>{
                   labelText: 'Cloro requerido (mg/L ou ppm)'
                 ),
                 style: const TextStyle(
-                  fontSize: 16,
+                  fontSize: 14,
                 ),
                 controller: cloroRequerido,
               ),
@@ -152,7 +153,7 @@ class _CalculadoraState extends State<Calculadora>{
                   labelText: 'Quantidade cloro (g)'
                 ),
                 style: const TextStyle(
-                  fontSize: 16,
+                  fontSize: 14,
                 ),
                 controller: quantidadeCloro,
               ),
@@ -162,7 +163,7 @@ class _CalculadoraState extends State<Calculadora>{
                   labelText: 'Quantidade água (L)'
                 ),
                 style: const TextStyle(
-                  fontSize: 16,
+                  fontSize: 14,
                 ),
                 controller: quantidadeAgua,
               ),
@@ -172,20 +173,20 @@ class _CalculadoraState extends State<Calculadora>{
                   labelText: 'Horas operacionais (h)'
                 ),
                 style: const TextStyle(
-                  fontSize: 16,
+                  fontSize: 14,
                 ),
                 controller: horasOperacionais,
               ),              
               Padding(
-                padding: EdgeInsets.only(top: 16),
+                padding: const EdgeInsets.only(top: 15),
                 child: ElevatedButton(   
                   style: ElevatedButton.styleFrom(
-                    primary: Color.fromRGBO(43, 57, 144, 1.0),
+                    primary: const Color.fromRGBO(43, 57, 144, 1.0),
                     onPrimary: Colors.white,
-                    minimumSize: Size(88, 40),
-                    maximumSize: Size(176,100),                    
+                    minimumSize: const Size(88, 40),
+                    maximumSize: const Size(176,100),                    
                     shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(8)),
+                      borderRadius: BorderRadius.all(Radius.circular(20)),
                     ),
                     textStyle: const TextStyle(
                       fontSize: 8,
@@ -199,14 +200,129 @@ class _CalculadoraState extends State<Calculadora>{
                   onPressed: _calcular,
                 ),
               ),
+              
+              Center(
+                child: Container(
+                  alignment: Alignment.center,
+                  margin: const EdgeInsets.only(top: 15),
+                  height: 190,
+                  
+                  decoration: BoxDecoration(
+                    //color: const Color.fromRGBO(220, 220, 220, 1.0),
+                    color: Color.fromARGB(176, 196, 222, 243),
+                    shape: BoxShape.rectangle,
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                  
+                  child: Text(
+                    textoConsumoCloro + '\n' 
+                    + textoConcentraSolucao + '\n'
+                    + textoDosagemSolucao + '\n'
+                    + textoAutonomiaSolucaoHoras + '\n'
+                    + textoAutonomiaSolucaoDias + '\n'
+                    + textoSugestao,                    
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                      letterSpacing: 0.10,
+                      color: Colors.black,
+                      
+                    ),
+                  ),
+                  
+                ),
+              ),
+              /*
+              Center(
+                child: Container(
+                  alignment: Alignment.center,
+                 // margin: const EdgeInsets.only(top: 3),
+                  height: 25,                  
+                  child: Text(
+                    textoConcentraSolucao,                    
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 14,
+                      letterSpacing: 0.5,
+                      color: Colors.black,
+                    ),
+                  ),
+                ),
+              ),
+              Center(
+                child: Container(
+                  alignment: Alignment.center,
+                  //margin: const EdgeInsets.only(top: 3),
+                  height: 30,              
+                  child: Text(
+                    textoDosagemSolucao,                    
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 14,
+                      letterSpacing: 0.5,
+                      color: Colors.black,
+                    ),
+                  ),
+                ),
+              ),
+              Center(
+                child: Container(
+                  alignment: Alignment.center,
+                  //margin: const EdgeInsets.only(top: 3),
+                  height: 30,
+                  child: Text(
+                    textoAutonomiaSolucaoHoras,                    
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 14,
+                      letterSpacing: 0.5,
+                      color: Colors.black,
+                    ),
+                  ),
+                ),
+              ),
+              Center(
+                child: Container(
+                  alignment: Alignment.center,
+                  //margin: const EdgeInsets.only(top: 3),
+                  height: 30,
+                  child: Text(
+                    textoAutonomiaSolucaoDias,                    
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 14,
+                      letterSpacing: 0.5,
+                      color: Colors.black,
+                    ),
+                  ),
+                ),
+              ),
+              Center(
+                child: Container(
+                  alignment: Alignment.center,
+                  //margin: const EdgeInsets.only(top: 3),
+                  height: 30,
+                  child: Text(
+                    textoSugestao,                    
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 14,
+                      letterSpacing: 0.5,
+                      color: Colors.black,
+                    ),
+                  ),
+                ),
+              ),
+              
               Padding(
                 padding: const EdgeInsets.only(top: 20),
                 child: Text(
-                  textoConsumoCloro,
+                  textoConsumoCloro,                  
                   style: const TextStyle(
-                    fontSize: 16,
+                    fontSize: 14,
                     fontWeight: FontWeight.bold,
-                    color: Color.fromRGBO(43, 57, 144, 1.0)
+                    //color: Color.fromRGBO(43, 57, 144, 1.0)
+                    color: Colors.black54,                    
                   ),
                 ),
               ),
@@ -215,18 +331,19 @@ class _CalculadoraState extends State<Calculadora>{
                 child: Text(
                   textoConcentraSolucao,
                   style: const TextStyle(
-                    fontSize: 16,
+                    fontSize: 14,
                     fontWeight: FontWeight.bold,
                     color: Color.fromRGBO(43, 57, 144, 1.0)
                   ),
                 ),
               ),
+              
               Padding(
                 padding: const EdgeInsets.only(top: 8),
                 child: Text(
                   textoDosagemSolucao,
                   style: const TextStyle(
-                      fontSize: 16,
+                      fontSize: 14,
                       fontWeight: FontWeight.bold,
                       color: Color.fromRGBO(43, 57, 144, 1.0)
                     ),
@@ -237,7 +354,7 @@ class _CalculadoraState extends State<Calculadora>{
                 child: Text(
                   textoAutonomiaSolucaoHoras,
                   style: const TextStyle(
-                      fontSize: 16,
+                      fontSize: 14,
                       fontWeight: FontWeight.bold,
                       color: Color.fromRGBO(43, 57, 144, 1.0)
                     ),
@@ -248,7 +365,7 @@ class _CalculadoraState extends State<Calculadora>{
                 child: Text(
                   textoAutonomiaSolucaoDias,
                   style: const TextStyle(
-                      fontSize: 16,
+                      fontSize: 14,
                       fontWeight: FontWeight.bold,
                       color: Color.fromRGBO(43, 57, 144, 1.0)
                     ),
@@ -259,12 +376,13 @@ class _CalculadoraState extends State<Calculadora>{
                 child: Text(
                   textoSugestao,
                   style: const TextStyle(
-                      fontSize: 16,
+                      fontSize: 14,
                       fontWeight: FontWeight.bold,
                       color: Color.fromRGBO(43, 57, 144, 1.0)
                     ),
                 ),
               ),
+              */
             ],
           ),
         ),
