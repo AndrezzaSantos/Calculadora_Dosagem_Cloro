@@ -1,4 +1,4 @@
-//import 'package:dosagemdecloro/calculadora.dart';
+import 'package:dosagemdecloro/calculadora.dart';
 import 'package:dosagemdecloro/home.dart';
 import 'package:flutter/material.dart';
 
