@@ -1,4 +1,4 @@
-#Tue Apr 19 00:02:42 BRT 2022
-base.0=C\:\\AmbienteTrabalho\\github\\public\\flutter\\dosagemdecloro\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
-path.0=classes.dex
+#Tue Apr 19 14:17:26 BRT 2022
+base.0=C\:\\AmbienteTrabalho\\Alura\\Flutter\\Calculadora_Dosagem_Cloro\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
 renamed.0=classes.dex
+path.0=classes.dex

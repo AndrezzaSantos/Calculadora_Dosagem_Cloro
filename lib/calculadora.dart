@@ -21,7 +21,13 @@ class _CalculadoraState extends State<Calculadora>{
   String textoConsumoCloro = '';
   String textoAutonomiaSolucaoHoras = '';
   String textoAutonomiaSolucaoDias = '';
-  String textoSugestao = "";
+  String textoSugestao = ''; 
+
+  String resultConsumoCloro = '';
+  String resultConcentraSolucao = '';
+  String resultDosagemSolucao = '';
+  String resultAutonomiaHoras = '';
+  String resultAutonomiaDias = '';
   
 
   void _calcular(){   
@@ -34,23 +40,25 @@ class _CalculadoraState extends State<Calculadora>{
 
     if(volumeAguaConsumida.text == '' || cloroRequerido.text == ''){
       setState(() {
-        textoConsumoCloro = 'Consumo de cloro (g/h): inserir dados corretamente!';
+        textoConsumoCloro = 'inserir dados corretamente!';
       });
     }else{
       consumoCloro = ((double.parse(volumeAguaConsumida.text)) / 1000) * (double.parse(cloroRequerido.text));
       setState(() {
-        textoConsumoCloro = 'Consumo de cloro (g/h): ' + consumoCloro.toStringAsFixed(2);
+        textoConsumoCloro = 'Consumo de cloro (g/h):';
+        resultConsumoCloro = consumoCloro.toStringAsFixed(2);
       });
     }
 
     if(quantidadeCloro.text == '' || quantidadeAgua.text == ''){
       setState(() {
-        textoConcentraSolucao = 'Concentração de solução (g/L): inserir dados corretamente!';
+        textoConcentraSolucao = 'inserir dados corretamente!';
       });
     }else{
       concentracaoSolucao = (double.parse(quantidadeCloro.text)) / (double.parse(quantidadeAgua.text));
       setState(() {
-        textoConcentraSolucao = 'Concentração de solução (g/L): ' + concentracaoSolucao.toStringAsFixed(2);      
+        textoConcentraSolucao = 'Concentração de solução (g/L):' ;  
+        resultConcentraSolucao = concentracaoSolucao.toStringAsFixed(2);     
       });
       
     }
@@ -62,18 +70,20 @@ class _CalculadoraState extends State<Calculadora>{
     }else{
       dosagemSolucao = consumoCloro / concentracaoSolucao;
       setState(() {
-        textoDosagemSolucao = 'Dosagem solução (L/h): ' + dosagemSolucao.toStringAsFixed(2);
+        textoDosagemSolucao = 'Dosagem solução (L/h):';  
+        resultDosagemSolucao = dosagemSolucao.toStringAsFixed(2);    
       });
     }
 
     if(quantidadeAgua.text == '' || dosagemSolucao == null){
       setState(() {
-        textoAutonomiaSolucaoHoras = 'Autonomia solução (horas): inserir dados corretamente!';
+        textoAutonomiaSolucaoHoras = 'Autonomia solução (horas): inserir dados corretamente!';        
       });
     }else{
       autonomiaSolucaoHoras = (double.parse(quantidadeAgua.text)) / dosagemSolucao;
       setState(() {
-        textoAutonomiaSolucaoHoras = 'Autonomia solução (horas): ' + autonomiaSolucaoHoras.toStringAsFixed(2);
+        textoAutonomiaSolucaoHoras = 'Autonomia solução (horas):';
+        resultAutonomiaHoras = autonomiaSolucaoHoras.toStringAsFixed(2);
       });
     }
 
@@ -84,11 +94,12 @@ class _CalculadoraState extends State<Calculadora>{
     }else{
       autonomiaSolucaoDias = autonomiaSolucaoHoras / (int.parse(horasOperacionais.text));
       setState(() {
-        textoAutonomiaSolucaoDias = 'Autonomia solução (dias): ' + autonomiaSolucaoDias.toStringAsFixed(2);
+        textoAutonomiaSolucaoDias = 'Autonomia solução (dias):';
+        resultAutonomiaDias = autonomiaSolucaoDias.toStringAsFixed(2);
       });
     }
 
-    textoSugestao = 'Sugerir dosadora com vazão máxima à (L/H): ' + dosagemSolucao.toStringAsFixed(2);
+    textoSugestao = 'Sugerir dosadora com vazão (L/H):';
 
   }
 
@@ -133,7 +144,7 @@ class _CalculadoraState extends State<Calculadora>{
                   labelText: 'Volume água consumida (L/h)'
                 ),
                 style: const TextStyle(
-                  fontSize: 14,
+                  fontSize: 16,
                 ),
                 controller: volumeAguaConsumida,
               ),
@@ -143,7 +154,7 @@ class _CalculadoraState extends State<Calculadora>{
                   labelText: 'Cloro requerido (mg/L ou ppm)'
                 ),
                 style: const TextStyle(
-                  fontSize: 14,
+                  fontSize: 16,
                 ),
                 controller: cloroRequerido,
               ),
@@ -153,7 +164,7 @@ class _CalculadoraState extends State<Calculadora>{
                   labelText: 'Quantidade cloro (g)'
                 ),
                 style: const TextStyle(
-                  fontSize: 14,
+                  fontSize: 16,
                 ),
                 controller: quantidadeCloro,
               ),
@@ -163,7 +174,7 @@ class _CalculadoraState extends State<Calculadora>{
                   labelText: 'Quantidade água (L)'
                 ),
                 style: const TextStyle(
-                  fontSize: 14,
+                  fontSize: 16,
                 ),
                 controller: quantidadeAgua,
               ),
@@ -173,12 +184,12 @@ class _CalculadoraState extends State<Calculadora>{
                   labelText: 'Horas operacionais (h)'
                 ),
                 style: const TextStyle(
-                  fontSize: 14,
+                  fontSize: 16,
                 ),
                 controller: horasOperacionais,
               ),              
               Padding(
-                padding: const EdgeInsets.only(top: 15),
+                padding: const EdgeInsets.all(32),
                 child: ElevatedButton(   
                   style: ElevatedButton.styleFrom(
                     primary: const Color.fromRGBO(43, 57, 144, 1.0),
@@ -198,6 +209,485 @@ class _CalculadoraState extends State<Calculadora>{
                     style: TextStyle(fontSize: 18),
                   ),
                   onPressed: _calcular,
+                ),
+              ),
+
+              Container(
+                height: 50,
+                child: ListView(
+                  scrollDirection: Axis.horizontal,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 2),
+                      child: InkWell(
+                        onTap: (() {}),
+                        child: Container(
+                          width: 50,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(100),
+                            color: const Color.fromARGB(255, 209, 211, 236),
+                          ),
+                          child: const Center(
+                            child: Icon(Icons.water_drop_outlined),                          
+                          ),
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 15),
+                      child: InkWell(
+                        onTap: (() {}),
+                        child: Container(                             
+                          child: Center(
+                            child: Text(
+                              textoConsumoCloro,
+                              style: const TextStyle(
+                                fontSize: 16
+                              ),
+                            ),                          
+                          ),
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 2),
+                      child: InkWell(
+                        onTap: (() {}),
+                        child: Container(                                                       
+                          child: Center(
+                            child: Text(
+                              resultConsumoCloro,
+                              style: const TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                                color: Color.fromARGB(255, 41, 40, 40),                                
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),                                
+              ),
+              const Padding(
+                padding: EdgeInsets.only(top: 8.0, bottom: 8.0),
+                child: Divider(
+                  height: 8,
+                  thickness: 1,
+                ),
+              ),
+              Container(
+                height: 50,
+                child: ListView(
+                  scrollDirection: Axis.horizontal,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 2),
+                      child: InkWell(
+                        onTap: (() {}),
+                        child: Container(
+                          width: 50,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(100),
+                            color: const Color.fromARGB(255, 209, 211, 236),
+                          ),
+                          child: const Center(
+                            child: Icon(Icons.bar_chart_outlined),                          
+                          ),
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 15),
+                      child: InkWell(
+                        onTap: (() {}),
+                        child: Container(                             
+                          child: Center(
+                            child: Text(
+                              textoConcentraSolucao,
+                              style: const TextStyle(
+                                fontSize: 16
+                              ),
+                            ),                          
+                          ),
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 2),
+                      child: InkWell(
+                        onTap: (() {}),
+                        child: Container(                                                       
+                          child: Center(
+                            child: Text(
+                              resultConcentraSolucao,
+                              style: const TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                                color: Color.fromARGB(255, 41, 40, 40),                                
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),                                
+              ),
+              const Padding(
+                padding: EdgeInsets.only(top: 8.0, bottom: 8.0),
+                child: Divider(
+                  height: 8,
+                  thickness: 1,
+                ),
+              ),
+              Container(
+                height: 50,
+                child: ListView(
+                  scrollDirection: Axis.horizontal,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 2),
+                      child: InkWell(
+                        onTap: (() {}),
+                        child: Container(
+                          width: 50,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(100),
+                            color: const Color.fromARGB(255, 209, 211, 236),
+                          ),
+                          child: const Center(
+                            child: Icon(Icons.bar_chart_outlined),                          
+                          ),
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 15),
+                      child: InkWell(
+                        onTap: (() {}),
+                        child: Container(                             
+                          child: Center(
+                            child: Text(
+                              textoDosagemSolucao,
+                              style: const TextStyle(
+                                fontSize: 16
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 4),
+                      child: InkWell(
+                        onTap: (() {}),
+                        child: Container(                                                       
+                          child: Center(
+                            child: Text(
+                              resultDosagemSolucao,
+                              style: const TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                                color: Color.fromARGB(255, 41, 40, 40),                                
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),                                
+              ),
+              const Padding(
+                padding: EdgeInsets.only(top: 8.0, bottom: 8.0),
+                child: Divider(
+                  height: 8,
+                  thickness: 1,
+                ),
+              ),
+              Container(
+                height: 50,
+                child: ListView(
+                  scrollDirection: Axis.horizontal,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 2),
+                      child: InkWell(
+                        onTap: (() {}),
+                        child: Container(
+                          width: 50,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(100),
+                            color: const Color.fromARGB(255, 209, 211, 236),
+                          ),
+                          child: const Center(
+                            child: Icon(Icons.access_time),                          
+                          ),
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 15),
+                      child: InkWell(
+                        onTap: (() {}),
+                        child: Container(                             
+                          child: Center(
+                            child: Text(
+                              textoAutonomiaSolucaoHoras,
+                              style: const TextStyle(
+                                fontSize: 16
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 4),
+                      child: InkWell(
+                        onTap: (() {}),
+                        child: Container(                                                       
+                          child: Center(
+                            child: Text(
+                              resultAutonomiaHoras,
+                              style: const TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                                color: Color.fromARGB(255, 41, 40, 40),                                
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const Padding(
+                padding: EdgeInsets.only(top: 8.0, bottom: 8.0),
+                child: Divider(
+                  height: 8,
+                  thickness: 1,
+                ),
+              ),
+              Container(
+                height: 50,
+                child: ListView(
+                  scrollDirection: Axis.horizontal,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 2),
+                      child: InkWell(
+                        onTap: (() {}),
+                        child: Container(
+                          width: 50,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(100),
+                            color: const Color.fromARGB(255, 209, 211, 236),
+                          ),
+                          child: const Center(
+                            child: Icon(Icons.access_time),                          
+                          ),
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 15),
+                      child: InkWell(
+                        onTap: (() {}),
+                        child: Container(                             
+                          child: Center(
+                            child: Text(
+                              textoAutonomiaSolucaoDias,
+                              style: const TextStyle(
+                                fontSize: 16
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 4),
+                      child: InkWell(
+                        onTap: (() {}),
+                        child: Container(                                                       
+                          child: Center(
+                            child: Text(
+                              resultAutonomiaDias,
+                              style: const TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                                color: Color.fromARGB(255, 41, 40, 40),                                
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),                                
+              ),
+              const Padding(
+                padding: EdgeInsets.only(top: 8.0, bottom: 8.0),
+                child: Divider(
+                  height: 8,
+                  thickness: 1,
+                ),
+              ),
+              Container(
+                height: 50,
+                child: ListView(
+                  scrollDirection: Axis.horizontal,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 2),
+                      child: InkWell(
+                        onTap: (() {}),
+                        child: Container(
+                          width: 50,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(100),
+                            color: const Color.fromARGB(255, 209, 211, 236),
+                          ),
+                          child: const Center(
+                            child: Icon(Icons.bar_chart_outlined),                          
+                          ),
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 15),
+                      child: InkWell(
+                        onTap: (() {}),
+                        child: Container(                             
+                          child: Center(
+                            child: Text(
+                              textoSugestao,
+                              style: const TextStyle(
+                                fontSize: 16
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding:  EdgeInsets.only(left: 4),                      
+                      child: InkWell(
+                        onTap: (() {}),
+                        child: Container(                                                       
+                          child: Center(                            
+                            child: Text(
+                              resultDosagemSolucao,
+                             // textDirection: TextDirection.rtl,
+                              style: const TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                                color: Color.fromARGB(255, 41, 40, 40),     
+                                                           
+                              ),
+                            ),
+                         ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),                                
+              ),
+              const Padding(
+                padding: EdgeInsets.only(top: 8.0, bottom: 8.0),
+                child: Divider(
+                  height: 8,
+                  thickness: 1,
+                ),
+              ),
+
+              /*
+              Container(
+                height: 140,
+                child: ListView(
+                  scrollDirection: Axis.horizontal,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(4.0),
+                      child: InkWell(
+                        onTap: (){},
+                        child: Container(                         
+                          width: 120,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            color: const Color.fromARGB(255, 180, 181, 192),
+                          ),
+                          child: Center(
+                            child: Text(
+                              textoConsumoCloro,
+                              textAlign: TextAlign.center,
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18,
+                                color: Color.fromARGB(255, 41, 40, 40),
+                              ),
+                            ),
+                            
+                          ),
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(4.0),
+                      child: InkWell(
+                        onTap: (){},
+                        child: Container(                         
+                          width: 120,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            color: const Color.fromARGB(255, 180, 181, 192),
+                          ),
+                          child: Center(
+                            child: Text(
+                              textoConcentraSolucao,
+                              textAlign: TextAlign.center,
+                              style: const TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: Color.fromARGB(255, 41, 40, 40),
+                              ),
+                            ),
+                            
+                          ),
+                        ),
+                      ),
+                    ),
+                    
+                    Padding(
+                      padding: const EdgeInsets.all(4.0),
+                      child: InkWell(
+                        onTap: (){},
+                        child: Container(                         
+                          width: 120,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            color: const Color.fromARGB(255, 180, 181, 192),
+                          ),
+                          child: Center(
+                            child: Text(
+                              textoDosagemSolucao,
+                              textAlign: TextAlign.center,
+                              style: const TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: Color.fromARGB(255, 41, 40, 40),
+                              ),
+                            ),
+                            
+                          ),
+                        ),
+                      ),
+                    ),
+                  ], 
                 ),
               ),
               
@@ -232,7 +722,7 @@ class _CalculadoraState extends State<Calculadora>{
                   
                 ),
               ),
-              /*
+              
               Center(
                 child: Container(
                   alignment: Alignment.center,

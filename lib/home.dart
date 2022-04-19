@@ -34,7 +34,7 @@ class _HomeState extends State<Home>{
                   child: Text(
                     'APP LUCIANO NERES',
                     style: TextStyle(
-                      fontSize: 34,
+                      fontSize: 30,
                       fontWeight: FontWeight.bold,
                       color: Color.fromRGBO(43, 57, 144, 1.0),  
                     ),
