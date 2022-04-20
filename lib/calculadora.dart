@@ -1,7 +1,8 @@
 
-
+//import 'package:flutter/src/material/dropdown.dart';
 import 'package:flutter/material.dart';
 
+// ignore: use_key_in_widget_constructors
 class Calculadora extends StatefulWidget {
   @override
   _CalculadoraState createState() => _CalculadoraState();
@@ -16,19 +17,31 @@ class _CalculadoraState extends State<Calculadora>{
   TextEditingController quantidadeAgua = TextEditingController();
   TextEditingController horasOperacionais = TextEditingController();   
  
-  String textoConcentraSolucao = '';
-  String textoDosagemSolucao = ''; 
-  String textoConsumoCloro = '';
-  String textoAutonomiaSolucaoHoras = '';
-  String textoAutonomiaSolucaoDias = '';
-  String textoSugestao = ''; 
-
   String resultConsumoCloro = '';
   String resultConcentraSolucao = '';
   String resultDosagemSolucao = '';
   String resultAutonomiaHoras = '';
   String resultAutonomiaDias = '';
   
+  String valorEscolhido = '';
+  
+  final items = ['0.50','0,75','1.0','1,25'];
+  String? value;
+
+   DropdownMenuItem<String> buildMenuItem(String item) => DropdownMenuItem(
+      value: item,
+      child: Center(
+        
+        child: Text(
+          
+          item,
+          style: const TextStyle(
+            fontSize: 15,
+            
+          ),
+        ),
+      ),
+    );
 
   void _calcular(){   
 
@@ -40,24 +53,22 @@ class _CalculadoraState extends State<Calculadora>{
 
     if(volumeAguaConsumida.text == '' || cloroRequerido.text == ''){
       setState(() {
-        textoConsumoCloro = 'inserir dados corretamente!';
+        resultConsumoCloro = 'N/A';
       });
     }else{
       consumoCloro = ((double.parse(volumeAguaConsumida.text)) / 1000) * (double.parse(cloroRequerido.text));
       setState(() {
-        textoConsumoCloro = 'Consumo de cloro (g/h):';
         resultConsumoCloro = consumoCloro.toStringAsFixed(2);
       });
     }
 
     if(quantidadeCloro.text == '' || quantidadeAgua.text == ''){
       setState(() {
-        textoConcentraSolucao = 'inserir dados corretamente!';
+        resultConcentraSolucao = 'N/A';
       });
     }else{
       concentracaoSolucao = (double.parse(quantidadeCloro.text)) / (double.parse(quantidadeAgua.text));
       setState(() {
-        textoConcentraSolucao = 'Concentração de solução (g/L):' ;  
         resultConcentraSolucao = concentracaoSolucao.toStringAsFixed(2);     
       });
       
@@ -65,41 +76,37 @@ class _CalculadoraState extends State<Calculadora>{
 
     if(consumoCloro == 0 || concentracaoSolucao == 0){
       setState(() {
-        textoDosagemSolucao = 'Dosagem solução (L/h): inserir dados corretamente!';
+        resultDosagemSolucao = 'N/A';
       });
     }else{
       dosagemSolucao = consumoCloro / concentracaoSolucao;
-      setState(() {
-        textoDosagemSolucao = 'Dosagem solução (L/h):';  
+      setState(() { 
         resultDosagemSolucao = dosagemSolucao.toStringAsFixed(2);    
       });
     }
 
     if(quantidadeAgua.text == '' || dosagemSolucao == null){
       setState(() {
-        textoAutonomiaSolucaoHoras = 'Autonomia solução (horas): inserir dados corretamente!';        
+        resultAutonomiaHoras = 'N/A';        
       });
     }else{
       autonomiaSolucaoHoras = (double.parse(quantidadeAgua.text)) / dosagemSolucao;
       setState(() {
-        textoAutonomiaSolucaoHoras = 'Autonomia solução (horas):';
         resultAutonomiaHoras = autonomiaSolucaoHoras.toStringAsFixed(2);
       });
     }
 
     if(autonomiaSolucaoHoras == 0 || horasOperacionais.text == ""){
       setState(() {
-        textoAutonomiaSolucaoDias = 'Autonomia solução (dias): inserir dados corretamente!';
+        resultAutonomiaDias = 'N/A';
       });
     }else{
       autonomiaSolucaoDias = autonomiaSolucaoHoras / (int.parse(horasOperacionais.text));
       setState(() {
-        textoAutonomiaSolucaoDias = 'Autonomia solução (dias):';
         resultAutonomiaDias = autonomiaSolucaoDias.toStringAsFixed(2);
       });
     }
-
-    textoSugestao = 'Sugerir dosadora com vazão (L/H):';
+     
 
   }
 
@@ -118,12 +125,12 @@ class _CalculadoraState extends State<Calculadora>{
     return Scaffold(
       appBar: AppBar(
         title: const Text('Simulador de Dosagem de Cloro'),
-        backgroundColor: Color.fromRGBO(43, 57, 144, 1.0),
+        backgroundColor: const Color.fromRGBO(43, 57, 144, 1.0),
       ),
       body: Container(
         //alignment: Alignment.center,
         child: SingleChildScrollView(
-          padding: EdgeInsets.all(12),
+          padding: const EdgeInsets.all(12),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
@@ -147,6 +154,38 @@ class _CalculadoraState extends State<Calculadora>{
                   fontSize: 16,
                 ),
                 controller: volumeAguaConsumida,
+              ),
+              const Padding(
+                padding: EdgeInsets.only(top: 10),
+                child: Text(
+                  'Cloro requerido (mg/L ou ppm)',
+                  style: TextStyle(
+                    fontSize: 16,                    
+                    color: Color.fromARGB(255, 80, 79, 79),
+                  ),
+                ),
+              ),              
+              Center(
+                child: Container(
+                  margin: const EdgeInsets.all(0.5),
+                  padding: const EdgeInsets.symmetric(horizontal: 4),
+                  child: DropdownButtonHideUnderline(
+                    child: DropdownButton<String>(
+                      hint: const Text('Selecione'),
+                      iconSize: 32,
+                      icon: const Icon(Icons.arrow_drop_down, color: Color.fromARGB(255, 80, 79, 79),),
+                      isExpanded: true,
+                      items: items.map(buildMenuItem).toList(),
+                      onChanged: (value) => setState(() => this.value = value),
+                      
+                      
+                    ),
+                  ),
+                ),
+              ),
+              const Divider(
+                height: 8,
+                thickness: 1,
               ),
               TextField(
                 keyboardType: TextInputType.number,
@@ -238,10 +277,10 @@ class _CalculadoraState extends State<Calculadora>{
                       child: InkWell(
                         onTap: (() {}),
                         child: Container(                             
-                          child: Center(
+                          child: const Center(
                             child: Text(
-                              textoConsumoCloro,
-                              style: const TextStyle(
+                              "Consumo de cloro (g/h):",
+                              style: TextStyle(
                                 fontSize: 16
                               ),
                             ),                          
@@ -250,7 +289,7 @@ class _CalculadoraState extends State<Calculadora>{
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(left: 2),
+                      padding: const EdgeInsets.only(left: 4),
                       child: InkWell(
                         onTap: (() {}),
                         child: Container(                                                       
@@ -303,10 +342,10 @@ class _CalculadoraState extends State<Calculadora>{
                       child: InkWell(
                         onTap: (() {}),
                         child: Container(                             
-                          child: Center(
+                          child: const Center(
                             child: Text(
-                              textoConcentraSolucao,
-                              style: const TextStyle(
+                              "Concentração de solução (g/L):",
+                              style: TextStyle(
                                 fontSize: 16
                               ),
                             ),                          
@@ -368,10 +407,10 @@ class _CalculadoraState extends State<Calculadora>{
                       child: InkWell(
                         onTap: (() {}),
                         child: Container(                             
-                          child: Center(
+                          child: const Center(
                             child: Text(
-                              textoDosagemSolucao,
-                              style: const TextStyle(
+                              'Dosagem solução (L/h):',
+                              style: TextStyle(
                                 fontSize: 16
                               ),
                             ),
@@ -433,10 +472,10 @@ class _CalculadoraState extends State<Calculadora>{
                       child: InkWell(
                         onTap: (() {}),
                         child: Container(                             
-                          child: Center(
+                          child: const Center(
                             child: Text(
-                              textoAutonomiaSolucaoHoras,
-                              style: const TextStyle(
+                              'Autonomia solução (horas):',
+                              style: TextStyle(
                                 fontSize: 16
                               ),
                             ),
@@ -498,10 +537,10 @@ class _CalculadoraState extends State<Calculadora>{
                       child: InkWell(
                         onTap: (() {}),
                         child: Container(                             
-                          child: Center(
+                          child: const Center(
                             child: Text(
-                              textoAutonomiaSolucaoDias,
-                              style: const TextStyle(
+                              'textoAutonomiaSolucaoDias:',
+                              style: TextStyle(
                                 fontSize: 16
                               ),
                             ),
@@ -563,10 +602,10 @@ class _CalculadoraState extends State<Calculadora>{
                       child: InkWell(
                         onTap: (() {}),
                         child: Container(                             
-                          child: Center(
+                          child: const Center(
                             child: Text(
-                              textoSugestao,
-                              style: const TextStyle(
+                              'Sugerir dosadora com vazão (L/H):',
+                              style: TextStyle(
                                 fontSize: 16
                               ),
                             ),
@@ -878,6 +917,7 @@ class _CalculadoraState extends State<Calculadora>{
         ),
       ),
     );
+   
   }
 
 }
